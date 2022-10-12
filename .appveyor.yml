@@ -1,0 +1,16 @@
+image: Ubuntu  # 
+
+stack: jdk 11  # версия JDK
+
+branches:
+  only:
+    - master  # ветка git
+
+build: off  # 
+
+install:
+  # запускаем SUT (& означает, что в фоновом режиме); 
+  - java -jar ./artifacts/app-card-delivery.jar &
+  - chmod +x gradlew
+build_script:
+  - ./gradlew test --info "-Dselenide.headless=true"
